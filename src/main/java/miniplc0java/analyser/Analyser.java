@@ -421,6 +421,8 @@ public final class Analyser {
     private void analyseBlockStmt() throws CompileError {
         expect(TokenType.L_BRACE);
 
+        analyseStatement();//至少一条语句
+
         while(nextIsStmt()){
             analyseStatement();
         }

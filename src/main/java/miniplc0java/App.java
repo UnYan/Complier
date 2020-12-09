@@ -102,6 +102,7 @@ public class App {
                 instructions = analyzer.analyse();
             } catch (Exception e) {
                 // 遇到错误不输出，直接退出
+                output.println(e.toString());
                 System.err.println(e);
                 System.exit(-1);
                 return;
