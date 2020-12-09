@@ -528,7 +528,7 @@ public final class Analyser {
 
         expect(TokenType.L_PAREN);
 
-        if(nextIsExpr())
+//        if(nextIsExpr())
             analyseExpression();
 
         peekedToken = peek();
