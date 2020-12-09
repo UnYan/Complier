@@ -204,16 +204,23 @@ public final class Analyser {
 
     private void analyseProgram() throws CompileError {
 
-        while(true){
-            if(nextIf(TokenType.EOF) != null)
-                return;
-            else if(nextIsFunction())
+        while(nextIsFunction() || nextIsDeclStmt()){
+            if(nextIsFunction())
                 analyseFunction();
             else if(nextIsDeclStmt())
                 analyseDeclStmt();
-            else
-                throw new AnalyzeError(ErrorCode.InvalidInput,peek().getStartPos());
         }
+//
+//        while(true){
+//            if(nextIf(TokenType.EOF) != null)
+//                return;
+//            else if(nextIsFunction())
+//                analyseFunction();
+//            else if(nextIsDeclStmt())
+//                analyseDeclStmt();
+//            else
+//                throw new AnalyzeError(ErrorCode.InvalidInput,peek().getStartPos());
+//        }
 
     }
 
