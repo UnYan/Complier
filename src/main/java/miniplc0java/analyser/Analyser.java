@@ -224,11 +224,6 @@ public final class Analyser {
         return peekedToken.getTokenType() == TokenType.FN_KW;
     }
 
-    private void analyseMain() throws CompileError {
-        // 主过程 -> 常量声明 变量声明 语句序列
-        throw new Error("Not implemented");
-    }
-
     private void analyseFunction() throws CompileError {
         expect(TokenType.FN_KW);
 

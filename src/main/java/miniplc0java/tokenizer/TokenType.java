@@ -124,7 +124,72 @@ public enum TokenType {
             case PLUS:
                 return "+";
             case MINUS:
-                return "*";
+                return "-";
+            case IDENT:
+                return "ident";
+            case UINT_LITERAL:
+                return "uint_literal";
+            case STRING_LITERAL:
+                return "string_literal";
+            case TYPE:
+                return "type";
+            case MUL:
+                return "*"''
+            case DIV:
+                return "/";
+                    /** == */
+            case EQ:
+                return "==",
+                    /** != */
+            case NEQ://20
+                return "!=";
+                    /** < */
+            case LT:
+                return "<"
+                    /** > */
+            case GT:
+                return ">";
+                    /** <= */
+            case LE:
+                return "<=";
+                    /** >= */
+            case GE://24
+                return ">=";
+                    /** = */
+            case ASSIGN:
+                return "=";
+                    /** 左括号 */
+            case L_PAREN:
+                return "(";
+                    /** 右括号 */
+            case R_PAREN:
+                return ")";
+                    /** 左花括号 */
+            case L_BRACE:
+                return "{";
+                    /** 右花括号 */
+            case R_BRACE:
+                return "}";
+                    /** -> */
+            case ARROW:
+                return "->";
+                    /** , */
+            case COMMA:
+                return ",";
+                    /** : */
+            case COLON:
+                return ":";
+                    /** int */
+            case INT:
+                return "int";
+                    /** void */
+            case VOID:
+                return "void";
+                    /** 分号 */
+            case SEMICOLON:
+                return ";";
+            case EOF:
+                return "EOF";
 //            case Begin:
 //                return "Begin";
 //            case Const:
