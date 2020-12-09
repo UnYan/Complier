@@ -61,7 +61,8 @@ public enum TokenType {
     /** void */
     VOID,
     /** 分号 */
-    SEMICOLON;
+    SEMICOLON,
+    EOF;
 //    /** 无符号整数 */
 //    Uint,
 //    /** 标识符 */
