@@ -1,13 +1,5 @@
 fn getString() -> void {
-    let a : int;
-    if y < 0 {
-      z = -1;
-    } else if y > 0 {
-      z = 1;
-    } else {
-      z = 0;
-    }
-    {}
+    getString();
     a = 1;
     return a;
 }

@@ -204,11 +204,15 @@ public final class Analyser {
 
     private void analyseProgram() throws CompileError {
 
-        while(nextIsDeclStmt() || nextIsFunction()){
-            if(nextIsFunction())
+        while(true){
+            if(nextIf(TokenType.EOF) != null)
+                return;
+            else if(nextIsFunction())
                 analyseFunction();
             else if(nextIsDeclStmt())
                 analyseDeclStmt();
+            else
+                throw new AnalyzeError(ErrorCode.InvalidInput,peek().getStartPos());
         }
 
     }
@@ -517,7 +521,8 @@ public final class Analyser {
 
         expect(TokenType.L_PAREN);
 
-        analyseExpression();
+        if(nextIsExpr())
+            analyseExpression();
 
         peekedToken = peek();
 
