@@ -424,6 +424,8 @@ public final class Analyser {
         while(nextIsStmt()){
             analyseStatement();
         }
+
+        expect(TokenType.R_BRACE);
     }
 
 
@@ -479,7 +481,7 @@ public final class Analyser {
 
     }
 
-    private boolean belongToOperator(TokenType tokenType){
+    public static boolean belongToOperator(TokenType tokenType){
         TokenType[] binary_operator = TokenType.values();
         for(int i = operatorStart; i <= operatorEnd;i++){
             if(tokenType== binary_operator[i]){

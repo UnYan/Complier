@@ -67,6 +67,8 @@ public class App {
             }
         }
 
+//        System.out.println(Analyser.belongToOperator(TokenType.TYPE));
+
         Scanner scanner;
         scanner = new Scanner(input);
         var iter = new StringIter(scanner);
@@ -81,7 +83,6 @@ public class App {
                     if (token.getTokenType().equals(TokenType.EOF)) {
                         break;
                     }
-
                     tokens.add(token);
                 }
             } catch (Exception e) {

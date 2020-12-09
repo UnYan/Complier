@@ -1,3 +1,16 @@
-fn getString() -> int {
-    "\n";
+fn getString() -> void {
+    let a : int;
+    if x > 0 {
+      x = x + 1;
+    }
+    if y < 0 {
+      z = -1;
+    } else if y > 0 {
+      z = 1;
+    } else {
+      z = 0
+    }
+
+    a = 1;
+    return a;
 }
