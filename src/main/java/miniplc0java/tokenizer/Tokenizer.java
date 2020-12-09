@@ -30,9 +30,9 @@ public class Tokenizer {
         // 跳过之前的所有空白字符
         skipSpaceCharacters();
 
-//        if (it.isEOF()) {
-//            return new Token(TokenType.EOF, "", it.currentPos(), it.currentPos());
-//        }
+        if (it.isEOF()) {
+            return new Token(TokenType.EOF, "", it.currentPos(), it.currentPos());
+        }
 
         char peek = it.peekChar();
         if(peek == '"')

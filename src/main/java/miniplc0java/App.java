@@ -81,12 +81,13 @@ public class App {
                     if (token.getTokenType().equals(TokenType.EOF)) {
                         break;
                     }
+
                     tokens.add(token);
                 }
             } catch (Exception e) {
                 // 遇到错误不输出，直接退出
                 System.err.println(e);
-                System.exit(0);
+                System.exit(-1);
                 return;
             }
             for (Token token : tokens) {
@@ -101,7 +102,7 @@ public class App {
             } catch (Exception e) {
                 // 遇到错误不输出，直接退出
                 System.err.println(e);
-                System.exit(0);
+                System.exit(-1);
                 return;
             }
             for (Instruction instruction : instructions) {
@@ -116,7 +117,7 @@ public class App {
     private static ArgumentParser buildArgparse() {
         var builder = ArgumentParsers.newFor("miniplc0-java");
         var parser = builder.build();
-        parser.addArgument("-t", "--tokenize").help("Tokenize the input").required(true).dest("output").action(Arguments.storeTrue());
+        parser.addArgument("-t", "--tokenize").help("Tokenize the input").action(Arguments.storeTrue());
         parser.addArgument("-l", "--analyse").help("Analyze the input").action(Arguments.storeTrue());
         parser.addArgument("-o", "--output").help("Set the output file").required(true).dest("output")
                 .action(Arguments.store());
