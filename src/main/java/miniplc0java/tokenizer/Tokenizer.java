@@ -173,7 +173,7 @@ public class Tokenizer {
                     return new Token(TokenType.EQ, "==", it.previousPos(), it.currentPos());
                 }
                 else
-                    return new Token(TokenType.ASSIGN, "==", it.previousPos(), it.currentPos());
+                    return new Token(TokenType.ASSIGN, "=", it.previousPos(), it.currentPos());
             case '!':
                 if(it.peekChar() == '='){
                     it.nextChar();

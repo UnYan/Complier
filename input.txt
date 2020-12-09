@@ -1,1 +1,3 @@
-fn getint() -> int { "\\" };
+fn getString() -> int {
+    a = a + 1;
+}
