@@ -134,18 +134,18 @@ public enum TokenType {
             case TYPE:
                 return "type";
             case MUL:
-                return "*"''
+                return "*";
             case DIV:
                 return "/";
                     /** == */
             case EQ:
-                return "==",
+                return "==";
                     /** != */
             case NEQ://20
                 return "!=";
                     /** < */
             case LT:
-                return "<"
+                return "<";
                     /** > */
             case GT:
                 return ">";
