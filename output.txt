@@ -4,4 +4,7 @@ Line: 0 Column: 9 Type: ( Value: (
 Line: 0 Column: 10 Type: ) Value: )
 Line: 0 Column: 13 Type: -> Value: ->
 Line: 0 Column: 15 Type: int Value: int
-Line: 0 Column: 18 Type: ; Value: ;
+Line: 0 Column: 19 Type: { Value: {
+Line: 0 Column: 21 Type: string_literal Value: \
+Line: 0 Column: 26 Type: } Value: }
+Line: 0 Column: 27 Type: ; Value: ;

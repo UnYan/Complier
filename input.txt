@@ -1,1 +1,1 @@
-fn getint() -> int;
+fn getint() -> int { "\\" };

@@ -51,12 +51,30 @@ public class Tokenizer {
         Pos end ;
         char peek = it.peekChar();
         String escape_sequence = "\\[\\\\\"'nrt]";
-        String string_regular_char = "[^\"\\\\]";
+        String string_regular_char = "[^\"\\\\\r\n\t]";
         StringBuilder STRING_LITERAL = new StringBuilder();
+        if(it.peekChar() != '"') {
+            throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
+        }
         it.nextChar();
         peek = it.peekChar();
-        while(Pattern.matches(escape_sequence,String.valueOf(peek))
-                || Pattern.matches(string_regular_char,String.valueOf(peek))){
+        while(Pattern.matches(string_regular_char,String.valueOf(peek))
+                || peek == '\\'){
+            if(peek == '\\'){
+                it.nextChar();
+                peek = it.peekChar();
+                switch (peek){
+                    case '\\':
+                    case '"':
+                    case '\'':
+                    case 'n':
+                    case 'r':
+                    case 't':
+                        break;
+                    default:
+                        throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
+                }
+            }
             STRING_LITERAL.append(it.nextChar());
             peek = it.peekChar();
         }

@@ -33,7 +33,6 @@ public class App {
             result = argparse.parseArgs(args);
         } catch (ArgumentParserException e1) {
             argparse.handleError(e1);
-            System.exit(-1);
             return;
         }
 
