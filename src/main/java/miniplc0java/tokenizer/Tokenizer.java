@@ -60,22 +60,37 @@ public class Tokenizer {
         peek = it.peekChar();
         while(Pattern.matches(string_regular_char,String.valueOf(peek))
                 || peek == '\\'){
+            char now ;
             if(peek == '\\'){
                 it.nextChar();
                 peek = it.peekChar();
                 switch (peek){
                     case '\\':
-                    case '"':
+                        now = '\\';
+                        break;
+                    case '\"':
+                        now = '\"';
+                        break;
                     case '\'':
+                        now = '\'';
+                        break;
                     case 'n':
+                        now = '\n';
+                        break;
                     case 'r':
+                        now = '\r';
+                        break;
                     case 't':
+                        now = '\t';
                         break;
                     default:
                         throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
                 }
+                STRING_LITERAL.append(now);
+                it.nextChar();
             }
-            STRING_LITERAL.append(it.nextChar());
+            else
+                STRING_LITERAL.append(it.nextChar());
             peek = it.peekChar();
         }
         if(it.peekChar() == '"') {
