@@ -63,6 +63,8 @@ public enum TokenType {
     /** 分号 */
     SEMICOLON,
     DOUBLE_LITERAL,
+    STRING,
+    DOUBLE,
     EOF;
 //    /** 无符号整数 */
 //    Uint,
@@ -186,6 +188,10 @@ public enum TokenType {
                     /** void */
             case VOID:
                 return "void";
+            case STRING:
+                return "string";
+            case DOUBLE:
+                return "double";
                     /** 分号 */
             case SEMICOLON:
                 return ";";

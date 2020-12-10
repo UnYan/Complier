@@ -23,12 +23,12 @@ miniplc0java/error/CompileError.java
 miniplc0java/tokenizer/TokenType.java
  miniplc0java.tokenizer.TokenType
  miniplc0java.tokenizer.TokenType$1
+miniplc0java/tokenizer/Tokenizer.java
+ miniplc0java.tokenizer.Tokenizer
 miniplc0java/tokenizer/Token.java
  miniplc0java.tokenizer.Token
 miniplc0java/error/ExpectedTokenError.java
  miniplc0java.error.ExpectedTokenError
-miniplc0java/tokenizer/Tokenizer.java
- miniplc0java.tokenizer.Tokenizer
 miniplc0java/analyser/Analyser.java
  miniplc0java.analyser.Analyser
  miniplc0java.analyser.Analyser$1

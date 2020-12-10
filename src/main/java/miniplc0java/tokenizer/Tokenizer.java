@@ -178,6 +178,10 @@ public class Tokenizer {
             return new Token(TokenType.INT, token, start, end);
         if("void".equals(token.toString()))
             return new Token(TokenType.VOID, token, start, end);
+        if("string".equals(token.toString()))
+            return new Token(TokenType.STRING, token, start, end);
+        if("double".equals(token.toString()))
+            return new Token(TokenType.DOUBLE, token, start, end);
         TokenType[] KW = TokenType.values();
         for(int i = identStart; i <= identEnd;i++){
             if(KW[i].toString().equalsIgnoreCase(token.toString())) {

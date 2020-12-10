@@ -126,6 +126,36 @@ public final class Analyser {
         }
     }
 
+    private Token expect(TokenType tt1,TokenType tt2,TokenType tt3) throws CompileError {
+        var token = peek();
+        if (token.getTokenType() == tt1) {
+            return next();
+        }
+        else if(token.getTokenType() == tt2)
+            return next();
+        else if(token.getTokenType() == tt3)
+            return next();
+        else {
+            throw new ExpectedTokenError(TokenType.TYPE, token);
+        }
+    }
+
+    private Token expect(TokenType tt1,TokenType tt2,TokenType tt3,TokenType tt4) throws CompileError {
+        var token = peek();
+        if (token.getTokenType() == tt1) {
+            return next();
+        }
+        else if(token.getTokenType() == tt2)
+            return next();
+        else if(token.getTokenType() == tt3)
+            return next();
+        else if(token.getTokenType() == tt4)
+            return next();
+        else {
+            throw new ExpectedTokenError(TokenType.TYPE, token);
+        }
+    }
+
     /**
      * 获取下一个变量的栈偏移
      * 
@@ -282,12 +312,16 @@ public final class Analyser {
 
         expect(TokenType.COLON);
 
-        expectTy();
+        expectTyWithoutVoid();
 
     }
 
-    private void expectTy() throws CompileError {
-        expect(TokenType.INT,TokenType.VOID);
+    private void expectTyWithoutVoid() throws CompileError {
+        expect(TokenType.INT,TokenType.DOUBLE);
+    }
+
+    private void expectTy() throws CompileError{
+        expect(TokenType.INT,TokenType.VOID,TokenType.DOUBLE);
     }
 
     private void analyseStatement() throws CompileError {
@@ -367,7 +401,7 @@ public final class Analyser {
 
         expect(TokenType.COLON);
 
-        expectTy();
+        expectTyWithoutVoid();
 
         expect(TokenType.ASSIGN);
 
@@ -383,7 +417,7 @@ public final class Analyser {
 
         expect(TokenType.COLON);
 
-        expect(TokenType.INT,TokenType.VOID);
+        expectTyWithoutVoid();
 
         peekedToken = peek();
         while(peekedToken.getTokenType() == TokenType.ASSIGN){
@@ -520,7 +554,7 @@ public final class Analyser {
     private void analyseASExpression() throws CompileError {
         expect(TokenType.AS_KW);
 
-        expectTy();
+        expectTyWithoutVoid();
 
     }
 
