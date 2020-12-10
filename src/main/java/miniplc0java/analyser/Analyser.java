@@ -272,10 +272,11 @@ public final class Analyser {
 
         expect(TokenType.L_PAREN);
 
-        if(nextIsFunctionParam())
+        if(nextIf(TokenType.R_PAREN) == null) {
             analyseFunctionParamList();
 
-        expect(TokenType.R_PAREN);
+            expect(TokenType.R_PAREN);
+        }
 
         expect(TokenType.ARROW);
 
@@ -420,7 +421,7 @@ public final class Analyser {
         expectTyWithoutVoid();
 
         peekedToken = peek();
-        while(peekedToken.getTokenType() == TokenType.ASSIGN){
+        if(peekedToken.getTokenType() == TokenType.ASSIGN){
             next();
             analyseExpression();
             peekedToken = peek();
@@ -456,6 +457,7 @@ public final class Analyser {
             case L_PAREN:
             case UINT_LITERAL:
             case STRING_LITERAL:
+            case DOUBLE_LITERAL:
                 return true;
             default:
                 return false;
@@ -516,14 +518,14 @@ public final class Analyser {
         }
 
         peekedToken = peek();
-        while(belongToOperator(peekedToken.getTokenType()) || peekedToken.getTokenType() == TokenType.AS_KW) {
-            if (belongToOperator(peekedToken.getTokenType())) {
-                next();
-                analyseExpression();
-            } else if (peekedToken.getTokenType() == TokenType.AS_KW) {
-                analyseASExpression();
-            }
+        while(belongToOperator(peekedToken.getTokenType())) {
+            next();
+            analyseExpression();
             peekedToken = peek();
+        }
+
+        if(peekedToken.getTokenType() == TokenType.AS_KW){
+            analyseASExpression();
         }
 
     }
@@ -577,7 +579,7 @@ public final class Analyser {
     }
 
     private void analyseLiteralExpression() throws CompileError {
-        expect(TokenType.UINT_LITERAL,TokenType.STRING_LITERAL);
+        expect(TokenType.UINT_LITERAL,TokenType.STRING_LITERAL,TokenType.DOUBLE_LITERAL);
     }
 
     private void analyseIdentExpression() throws CompileError {
