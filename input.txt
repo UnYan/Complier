@@ -1,3 +1,5 @@
+1.
+
 fn getString() -> void {
     getString();
     a = 1;

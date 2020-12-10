@@ -203,24 +203,24 @@ public final class Analyser {
     }
 
     private void analyseProgram() throws CompileError {
-
-        while(nextIsFunction() || nextIsDeclStmt()){
-            if(nextIsFunction())
-                analyseFunction();
-            else if(nextIsDeclStmt())
-                analyseDeclStmt();
-        }
 //
-//        while(true){
-//            if(nextIf(TokenType.EOF) != null)
-//                return;
-//            else if(nextIsFunction())
+//        while(nextIsFunction() || nextIsDeclStmt()){
+//            if(nextIsFunction())
 //                analyseFunction();
 //            else if(nextIsDeclStmt())
 //                analyseDeclStmt();
-//            else
-//                throw new AnalyzeError(ErrorCode.InvalidInput,peek().getStartPos());
 //        }
+
+        while(true){
+            if(nextIf(TokenType.EOF) != null)
+                return;
+            else if(nextIsFunction())
+                analyseFunction();
+            else if(nextIsDeclStmt())
+                analyseDeclStmt();
+            else
+                throw new AnalyzeError(ErrorCode.InvalidInput,peek().getStartPos());
+        }
 
     }
 
@@ -528,7 +528,7 @@ public final class Analyser {
 
         expect(TokenType.L_PAREN);
 
-//        if(nextIsExpr())
+        if(nextIsExpr())
             analyseExpression();
 
         peekedToken = peek();

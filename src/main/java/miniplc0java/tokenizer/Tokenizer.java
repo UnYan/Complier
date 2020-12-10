@@ -119,6 +119,37 @@ public class Tokenizer {
             num.append(it.nextChar());
             peek = it.peekChar();
         }
+        if(peek == '.'){
+            num.append(it.nextChar());
+            peek = it.peekChar();
+            if(Character.isDigit(peek)) {
+                while (Character.isDigit(peek)) {
+                    num.append(it.nextChar());
+                    peek = it.peekChar();
+                }
+                if(peek == 'e' || peek == 'E'){
+                    num.append(it.nextChar());
+                    peek = it.peekChar();
+                    if(Character.isDigit(peek)) {
+                        while (Character.isDigit(peek)) {
+                            num.append(it.nextChar());
+                            peek = it.peekChar();
+                        }
+                        end = it.currentPos();
+                        return new Token(TokenType.DOUBLE_LITERAL, num, start, end);
+                    }
+                    else
+                        throw new TokenizeError(ErrorCode.InvalidInput,it.previousPos());
+                }
+                else {
+                    end = it.currentPos();
+                    return new Token(TokenType.DOUBLE_LITERAL, num, start, end);
+                }
+            }
+            else
+                throw new TokenizeError(ErrorCode.InvalidInput,it.previousPos());
+
+        }
         end = it.currentPos();
         return new Token(TokenType.UINT_LITERAL, num, start, end);
 
