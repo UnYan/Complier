@@ -2,7 +2,7 @@ FROM gradle:jdk15
 COPY ./* /app/
 # 编译程序
 WORKDIR /app/
-RUN javac -d ./output ./main/java/miniplc0java/c0.java
+RUN javac -d ./output ./src/main/java/miniplc0java/c0.java
 # 将当前目录设为输出目录
 WORKDIR /app/output
 #FROM openjdk:12-alpine

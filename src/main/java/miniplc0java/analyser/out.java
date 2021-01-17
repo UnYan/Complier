@@ -46,8 +46,8 @@ public class out {
 
             for (Instruction instruction : fnInstructions) {
                 file.write(instruction.getOpt().getI());
-                if (instruction.getValue() != null) { //有操作数
-                    if (instruction.getOpt() == Operation.push) { //是push
+                if (instruction.getValue() != null) {
+                    if (instruction.getOpt() == Operation.push) {
                         file.write(longToByte((long) instruction.getValue()));
                     } else {
                         file.write(intToByte((int) instruction.getValue()));
