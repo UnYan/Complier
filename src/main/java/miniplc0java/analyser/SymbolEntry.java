@@ -1,5 +1,7 @@
 package miniplc0java.analyser;
 
+import miniplc0java.tokenizer.TokenType;
+
 public class SymbolEntry {
     boolean isConstant;
     boolean isInitialized;

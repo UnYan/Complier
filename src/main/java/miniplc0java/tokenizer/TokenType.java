@@ -65,6 +65,10 @@ public enum TokenType {
     DOUBLE_LITERAL,
     STRING,
     DOUBLE,
+    SHARP,
+    FUNCTION,
+    CHAR_LITERAL,
+    BOOL,
     EOF;
 //    /** 无符号整数 */
 //    Uint,

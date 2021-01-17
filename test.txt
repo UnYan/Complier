@@ -1,0 +1,8 @@
+fn fn123
+a123 "qweqw\\\n\""
+as let const while if else return
+___a
+-> (){}
+<= != == = >= + - * /
+,;:
+123556abc

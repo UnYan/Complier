@@ -5,6 +5,7 @@ import miniplc0java.error.ErrorCode;
 import miniplc0java.util.Pos;
 
 import java.awt.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tokenizer {
@@ -36,17 +37,26 @@ public class Tokenizer {
 
         char peek = it.peekChar();
         if(peek == '"')
-            return lexSTRING_LITERAL();
-        if (Character.isDigit(peek)) {
-            return lexUINT_LITERAL();
+            return lexSTRING();
+        else if(peek == '\'') {
+            return lexCHAR();
+        }
+        else if (Character.isDigit(peek)) {
+            return lexUIntORDouble();
         } else if (Character.isAlphabetic(peek)) {
             return lexIdentOrKeyword();
-        } else {
+        }
+        else if(peek == '_') {
+            return lexIdentOrKeyword();
+        }
+        else {
             return lexOperatorOrUnknown();
         }
     }
 
-    private Token lexSTRING_LITERAL() throws TokenizeError{
+
+
+    private Token lexSTRING() throws TokenizeError{
         Pos start = it.currentPos();
         Pos end ;
         char peek = it.peekChar();
@@ -102,7 +112,49 @@ public class Tokenizer {
             throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
     }
 
-    private Token lexUINT_LITERAL() throws TokenizeError {
+    private Token lexCHAR() throws TokenizeError {
+        //token.setLength(0);
+        String token = "";
+        Pos start = it.currentPos();
+
+        it.nextChar();
+        char peek = it.peekChar();
+
+        if(peek != '\'' && peek != '\\'){
+            Token toke = new Token(TokenType.CHAR_LITERAL, it.nextChar(), start, it.currentPos());
+        }
+        else if(peek == '\\'){
+            it.nextChar();
+            Pattern escape_sequence = Pattern.compile("[\\\\\"'nrt]");
+            peek = it.peekChar();
+            Matcher mat = escape_sequence.matcher(String.valueOf(peek));
+            boolean matches = mat.matches();
+            char cur ;
+
+            if(matches) {
+                if (peek == '\\') {
+                    cur = '\\';
+                } else if (peek == 'n') {
+                    cur = '\n';
+                } else if (peek == 't') {
+                    cur = '\t';
+                } else if (peek == '"') {
+                    cur = '"';
+                } else if (peek == 'r') {
+                    cur = '\r';
+                } else if (peek == '\'') {
+                    cur = '\'';
+                } else {
+                    throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
+                }
+                it.nextChar();
+                return new Token(TokenType.CHAR_LITERAL, cur, start, it.currentPos());
+            }
+        }
+        return null;
+    }
+
+    private Token lexUIntORDouble() throws TokenizeError {
         // 请填空：
         // 直到查看下一个字符不是数字为止:
         // -- 前进一个字符，并存储这个字符
@@ -130,28 +182,35 @@ public class Tokenizer {
                 if(peek == 'e' || peek == 'E'){
                     num.append(it.nextChar());
                     peek = it.peekChar();
+                    if(peek == '+' || peek == '-'){
+                        num.append(it.nextChar());
+                        peek = it.peekChar();
+                    }
                     if(Character.isDigit(peek)) {
                         while (Character.isDigit(peek)) {
                             num.append(it.nextChar());
                             peek = it.peekChar();
                         }
                         end = it.currentPos();
-                        return new Token(TokenType.DOUBLE_LITERAL, num, start, end);
+                        return new Token(TokenType.DOUBLE_LITERAL, Double.valueOf(num.toString()), start, end);
                     }
                     else
                         throw new TokenizeError(ErrorCode.InvalidInput,it.previousPos());
                 }
                 else {
                     end = it.currentPos();
-                    return new Token(TokenType.DOUBLE_LITERAL, num, start, end);
+                    return new Token(TokenType.DOUBLE_LITERAL, Double.valueOf(num.toString()), start, end);
                 }
             }
             else
                 throw new TokenizeError(ErrorCode.InvalidInput,it.previousPos());
 
         }
-        end = it.currentPos();
-        return new Token(TokenType.UINT_LITERAL, num, start, end);
+        if(num.length() != 0) {
+            end = it.currentPos();
+            return new Token(TokenType.UINT_LITERAL, Long.valueOf(num.toString()), start, end);
+        }
+        return null;
 
     }
 
@@ -169,19 +228,19 @@ public class Tokenizer {
         Pos end ;
         StringBuilder token = new StringBuilder();
         char peek = it.peekChar();
-        while(Character.isAlphabetic(peek) || Character.isDigit(peek)){
+        while(Character.isAlphabetic(peek) || Character.isDigit(peek) || peek == '_'){
             token.append(it.nextChar());
             peek = it.peekChar();
         }
         end = it.currentPos();
-        if("int".equals(token.toString()))
-            return new Token(TokenType.INT, token, start, end);
-        if("void".equals(token.toString()))
-            return new Token(TokenType.VOID, token, start, end);
-        if("string".equals(token.toString()))
-            return new Token(TokenType.STRING, token, start, end);
-        if("double".equals(token.toString()))
-            return new Token(TokenType.DOUBLE, token, start, end);
+//        if("int".equals(token.toString()))
+//            return new Token(TokenType.INT, token, start, end);
+//        if("void".equals(token.toString()))
+//            return new Token(TokenType.VOID, token, start, end);
+//        if("string".equals(token.toString()))
+//            return new Token(TokenType.STRING, token, start, end);
+//        if("double".equals(token.toString()))
+//            return new Token(TokenType.DOUBLE, token, start, end);
         TokenType[] KW = TokenType.values();
         for(int i = identStart; i <= identEnd;i++){
             if(KW[i].toString().equalsIgnoreCase(token.toString())) {

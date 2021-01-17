@@ -1,7 +1,4 @@
-fn getString(a : int) -> void {
-    1.1;
-    let a : int = 1;
-    getString();
-    a = 1;
+fn getString(a : int) -> int {
+    let b : int = 1;
     return a;
 }
