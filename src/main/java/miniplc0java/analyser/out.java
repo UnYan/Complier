@@ -7,50 +7,50 @@ import miniplc0java.instruction.Operation;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class out {
-    public static void Out(String name, ArrayList<String> globalV, ArrayList<FnInstruction> fnList) throws Exception{
-        FileOutputStream file = new FileOutputStream(new File(name));
-        file.write(intToByte(0x72303b3e));
-        file.write(intToByte(0x1));
+    public static void Out(PrintStream output, ArrayList<String> globalV, ArrayList<FnInstruction> fnList) throws Exception{
+        output.write(intToByte(0x72303b3e));
+        output.write(intToByte(0x1));
 
-        file.write(intToByte(globalV.size()));
+        output.write(intToByte(globalV.size()));
 
         for (String s : globalV) { //全局
             if (s.equals("1")) {
-                file.write(0);
-                file.write(intToByte(8));
-                file.write(longToByte(0L));
+                output.write(0);
+                output.write(intToByte(8));
+                output.write(longToByte(0L));
             } else if (s.equals("0")) {
-                file.write(1);
-                file.write(intToByte(8));
-                file.write(longToByte(0L));
+                output.write(1);
+                output.write(intToByte(8));
+                output.write(longToByte(0L));
             } else { //函数名、字符串
-                file.write(1);
-                file.write(s.length());
-                file.write(s.getBytes());
+                output.write(1);
+                output.write(s.length());
+                output.write(s.getBytes());
             }
         }
 
-        file.write(intToByte(fnList.size()));// functions.count
+        output.write(intToByte(fnList.size()));// functions.count
 
         for (FnInstruction fnInstruction : fnList) { //function
-            file.write(intToByte(fnInstruction.getName()));
-            file.write(intToByte(fnInstruction.getRet_slots()));
-            file.write(intToByte(fnInstruction.getParam_slots()));
-            file.write(intToByte(fnInstruction.getLoc_slots()));
-            file.write(intToByte(fnInstruction.getBodyCount()));
+            output.write(intToByte(fnInstruction.getName()));
+            output.write(intToByte(fnInstruction.getRet_slots()));
+            output.write(intToByte(fnInstruction.getParam_slots()));
+            output.write(intToByte(fnInstruction.getLoc_slots()));
+            output.write(intToByte(fnInstruction.getBodyCount()));
 
             ArrayList<Instruction> fnInstructions = fnInstruction.getBodyItem();
 
             for (Instruction instruction : fnInstructions) {
-                file.write(instruction.getOpt().getI());
+                output.write(instruction.getOpt().getI());
                 if (instruction.getValue() != null) {
                     if (instruction.getOpt() == Operation.push) {
-                        file.write(longToByte((long) instruction.getValue()));
+                        output.write(longToByte((long) instruction.getValue()));
                     } else {
-                        file.write(intToByte((int) instruction.getValue()));
+                        output.write(intToByte((int) instruction.getValue()));
                     }
                 }
             }

@@ -13,6 +13,7 @@ import miniplc0java.tokenizer.TokenType;
 import miniplc0java.tokenizer.Tokenizer;
 import miniplc0java.util.Pos;
 
+import java.io.PrintStream;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.ToDoubleBiFunction;
@@ -77,13 +78,13 @@ public final class Analyser {
         this.instructions = new ArrayList<>();
     }
 
-//    public List<Instruction> analyse() throws CompileError {
-////        addOperatorList();
-////        initOperatorPriority();
-//        analyseProgram();
-////        outputC0();
-//        return instructions;
-//    }
+    public List<Instruction> analyse(PrintStream output) throws Exception {
+//        addOperatorList();
+//        initOperatorPriority();
+        analyseProgram(output);
+//        outputC0();
+        return instructions;
+    }
 
     public void outputC0(){
         byte[] bytes = null;
@@ -493,7 +494,7 @@ public final class Analyser {
 //        }
 //    }
 
-    public void analyseProgram(String name) throws Exception {
+    public void analyseProgram(PrintStream output) throws Exception {
 //
 //        while(nextIsFunction() || nextIsDeclStmt()){
 //            if(nextIsFunction())
@@ -512,7 +513,7 @@ public final class Analyser {
             System.out.println(fnList.toString());
         }
 
-        out.Out(name, GlobalVariable, fnLists);
+        out.Out(output, GlobalVariable, fnLists);
 
 //        while(true){
 //            if(nextIf(TokenType.EOF) != null)

@@ -16,8 +16,8 @@ miniplc0java/analyser/SymbolBlock.java
  miniplc0java.analyser.SymbolBlock
 miniplc0java/c0.java
  miniplc0java.c0
-miniplc0java/App.java
- miniplc0java.App
+miniplc0java/instruction/Operation.java
+ miniplc0java.instruction.Operation
 miniplc0java/tokenizer/StringIter.java
  miniplc0java.tokenizer.StringIter
 miniplc0java/tokenizer/Token.java
@@ -41,8 +41,6 @@ miniplc0java/analyser/SymbolEntry.java
  miniplc0java.analyser.SymbolEntry
 miniplc0java/analyser/SymbolType.java
  miniplc0java.analyser.SymbolType
-miniplc0java/instruction/Operation.java
- miniplc0java.instruction.Operation
 miniplc0java/analyser/Analyser.java
  miniplc0java.analyser.Analyser
  miniplc0java.analyser.Analyser$1
@@ -52,3 +50,5 @@ miniplc0java/analyser/Analyser.java
  miniplc0java.analyser.Analyser$5
 miniplc0java/analyser/out.java
  miniplc0java.analyser.out
+miniplc0java/App.java
+ miniplc0java.App
