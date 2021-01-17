@@ -82,9 +82,9 @@ public final class Analyser {
 //        addOperatorList();
 //        initOperatorPriority();
         throw new AnalyzeError(ErrorCode.InvalidInput,null);
-        analyseProgram(output);
+//        analyseProgram(output);
 //        outputC0();
-        return instructions;
+//        return instructions;
     }
 
     public void outputC0(){
