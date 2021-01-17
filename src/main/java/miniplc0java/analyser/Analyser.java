@@ -81,6 +81,7 @@ public final class Analyser {
     public List<Instruction> analyse(PrintStream output) throws Exception {
 //        addOperatorList();
 //        initOperatorPriority();
+        throw new AnalyzeError(ErrorCode.InvalidInput,null);
         analyseProgram(output);
 //        outputC0();
         return instructions;
