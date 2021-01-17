@@ -41,7 +41,9 @@ public class StringIter {
             return;
         }
         while (scanner.hasNext()) {
-            linesBuffer.add(scanner.nextLine() + '\n');
+            String line = scanner.nextLine();
+            linesBuffer.add(line + '\n');
+            System.out.println(line);
         }
         // todo:check read \n?
         initialized = true;
